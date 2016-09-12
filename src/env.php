@@ -46,19 +46,25 @@ if (!function_exists('env')) {
                         $dirname = dirname($file);
                         $filtered = $envs;
                         foreach ($json as $key => $val) {
-                            if (is_string($val)) {
-                                $val = str_replace(array('{__dirname__}', '{__DIR__}'), $dirname, $val);
-                                if (preg_match_all('/(\{([^\}]+)\})/i', $val, $matches)) {
+                            if (is_string($val) || is_array($val)) {
+                                $v = (is_array($val) ? json_encode($val) : $val);
+                                $v = str_replace(array('{__dirname__}', '{__DIR__}'), $dirname, $v);
+                                if (preg_match_all('/(\{([^\}]+)\})/i', $v, $matches)) {
                                     foreach ($matches[2] as $n => $holder) {
                                         if (array_key_exists($holder, $filtered)) {
-                                            $val = str_replace($matches[1][$n], $filtered[$holder], $val);
+                                            $v = str_replace($matches[1][$n], $filtered[$holder], $v);
                                         } else {
-                                            $val = str_replace($matches[1][$n], '', $val);
+                                            $v = str_replace($matches[1][$n], '', $v);
                                         }
                                     }
                                 }
-                                if (is_file($val) || is_dir($val)) {
-                                    $val = realpath($val);
+
+                                if (is_array($val)) {
+                                    $val = json_decode($v, true);
+                                } elseif (is_file($v) || is_dir($v)) {
+                                    $val = realpath($v);
+                                } else {
+                                    $val = $v;
                                 }
                             }
 

@@ -88,4 +88,16 @@ class EnvTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(env('ENV_NESTED_ITEM3'), 'Item1 after Item2 after Item3');
     }
+
+    public function testNestedArray()
+    {
+        $value = env('ENV_NESTED_ARRAY');
+        $this->assertTrue(is_array($value));
+    }
+
+    public function testNestedArray1()
+    {
+        $value = env('ENV_NESTED_ARRAY');
+        $this->assertEquals($value[0], 'Item1 after Array1');
+    }
 }
