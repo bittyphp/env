@@ -1,0 +1,4 @@
+{
+  "ENV_NESTED_ITEM2": "{ENV_NESTED_ITEM1} after Item2",
+  "ENV_NESTED_ITEM3": "{ENV_NESTED_ITEM2} after Item3"
+}

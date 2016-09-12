@@ -1,0 +1,7 @@
+{
+  "ENV_STRING": "String Value",
+  "ENV_INTEGER": 100,
+  "ENV_BOOL": true,
+  "ENV_NULL": null,
+  "ENV_NESTED_ITEM1": "Item1"
+}
