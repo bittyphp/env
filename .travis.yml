@@ -17,5 +17,4 @@ before_script:
   - travis_retry composer require
 
 script:
-  - mkdir -p build/logs
   - ./vendor/bin/phpunit
