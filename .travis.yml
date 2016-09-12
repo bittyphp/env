@@ -17,8 +17,4 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - ./vendor/bin/parallel-lint src tests
-  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-
-after_script:
-  - php vendor/bin/coveralls
+  - ./vendor/bin/phpunit
