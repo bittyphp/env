@@ -9,12 +9,5 @@ php:
   - 7.1
   - hhvm
 
-sudo: false
-
-before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-dist
-  - travis_retry composer update
-
 script:
   - ./vendor/bin/phpunit
