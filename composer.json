@@ -21,5 +21,8 @@
     "files": [
       "src/function.php"
     ]
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.3"
   }
 }
