@@ -313,7 +313,7 @@ class Env
             }
             if (!empty($replaces)) {
                 $value = str_replace(array_keys($replaces), array_values($replaces), $value);
-                if (preg_match_all('/(\{([\w\-\.]+)\})/isu', $value)) {
+                if (preg_match('/(\{([\w\-\.]+)\})/isu', $value)) {
                     ++self::$filterRetry;
                 }
             }
