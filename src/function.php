@@ -1,5 +1,9 @@
 <?php
 if (!function_exists('env')) {
+    if (!class_exists('\\BittyPHP\\Env')) {
+        include(__DIR__.'/Env.php');
+    }
+    
     /**
      * Env class alias
      * @param  mixed $name Key name
