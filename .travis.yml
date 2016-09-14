@@ -9,5 +9,4 @@ php:
   - 7.1
   - hhvm
 
-script:
-  - ./vendor/bin/phpunit
+script: phpunit
