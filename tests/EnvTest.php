@@ -18,36 +18,23 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->json = array_replace($json1, $json2);
     }
 
-    public function testLoadSingleFile()
+    public function testLoadFile()
     {
-        env($this->file1);
+        env(array($this->file1, $this->file2));
         $this->assertEquals(env('ENV_STRING'), $this->json['ENV_STRING']);
     }
 
     public function testClear()
     {
-        env(false, false);
+        env(PHP_EOL);
         $this->assertNull(env('ENV_STRING'));
-    }
-
-    public function testLoadFileByArray()
-    {
-        env(false, false);
         env(array($this->file1, $this->file2));
-        $this->assertEquals(env('ENV_STRING'), $this->json['ENV_STRING']);
-    }
-
-    public function testLoadFileByArgs()
-    {
-        env(false, false);
-        env($this->file1, $this->file2);
-        $this->assertEquals(env('ENV_STRING'), $this->json['ENV_STRING']);
     }
 
     public function testGetAll()
     {
-        $all = env(true);
-        $this->assertGreaterThanOrEqual(count($this->json), count($all));
+        $all = env();
+        $this->assertNotNull(env('ENV_STRING'));
     }
 
     public function testGetNormal()
@@ -55,21 +42,14 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(env('ENV_STRING'), $this->json['ENV_STRING']);
     }
 
+    public function testGetGetEnv()
+    {
+        $this->assertEquals(getenv('ENV_STRING'), $this->json['ENV_STRING']);
+    }
+
     public function testGetGlobalEnv()
     {
         $this->assertEquals($_ENV['ENV_STRING'], $this->json['ENV_STRING']);
-    }
-
-    public function testGetGlobalServer()
-    {
-        $this->assertEquals($_SERVER['ENV_STRING'], $this->json['ENV_STRING']);
-    }
-
-    public function testGetGetenv()
-    {
-        if (function_exists('getenv')) {
-            $this->assertEquals(getenv('ENV_STRING'), $this->json['ENV_STRING']);
-        }
     }
 
     public function testGetApacheGetenv()
@@ -81,12 +61,12 @@ class EnvTest extends \PHPUnit_Framework_TestCase
 
     public function testNested1()
     {
-        $this->assertEquals(env('ENV_NESTED_ITEM2'), 'Item1 after Item2');
+        $this->assertEquals(env('ENV_NESTED_ITEM3'), 'Item1 after Item3');
     }
 
     public function testNested2()
     {
-        $this->assertEquals(env('ENV_NESTED_ITEM3'), 'Item1 after Item2 after Item3');
+        $this->assertEquals(env('ENV_NESTED_ITEM2'), 'Item1 after Item3 after Item2');
     }
 
     public function testNestedArray()

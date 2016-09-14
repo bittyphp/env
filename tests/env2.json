@@ -1,7 +1,20 @@
 {
-  "ENV_NESTED_ITEM2": "{ENV_NESTED_ITEM1} after Item2",
-  "ENV_NESTED_ITEM3": "{ENV_NESTED_ITEM2} after Item3",
+  "ENV_NESTED_ITEM2": "{ENV_NESTED_ITEM3} after Item2",
+  "ENV_NESTED_ITEM3": "{ENV_NESTED_ITEM1} after Item3",
   "ENV_NESTED_ARRAY": [
     "{ENV_NESTED_ITEM1} after Array1"
+  ],
+  "ENV_HIERARCHICAL_ARRAY": {
+    "Level1": "Level1 Value",
+    "Level2": {
+      "Level2-2": 0
+    }
+  },
+  "ENV_HIERARCHICAL_VALUE1": "{ENV_HIERARCHICAL_ARRAY.Level1}",
+  "ENV_HIERARCHICAL_VALUE2": "{ENV_HIERARCHICAL_ARRAY.Level2.Level2-2}",
+  "ENV_GLOBAL_VARS": [
+    "{HTTP_HOST}",
+    "{__dir__}/../",
+    "{__FILE__}"
   ]
 }
