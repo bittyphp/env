@@ -14,7 +14,6 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-dist
   - travis_retry composer require
-  - travis_retry composer update
 
 script:
   - mkdir -p build/logs
