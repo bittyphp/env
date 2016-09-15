@@ -23,6 +23,7 @@
     ]
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^2.3"
+    "squizlabs/php_codesniffer": "^2.3",
+    "satooshi/php-coveralls": "^1.0"
   }
 }
