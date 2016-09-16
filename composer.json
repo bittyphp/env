@@ -1,6 +1,6 @@
 {
   "name": "bittyphp/env",
-  "description": "Simple function Environment from JSON file.",
+  "description": "Set and use environment from JSON file.",
   "type": "library",
   "keywords": ["environment", "env"],
   "license": "MIT",
