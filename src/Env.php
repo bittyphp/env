@@ -242,7 +242,11 @@ class Env
                 $json = json_decode($content, true);
                 if (empty($json)) {
                     if (JSON_ERROR_NONE !== ($code = json_last_error())) {
-                        throw new \Exception(json_last_error_msg(), $code);
+                        $message = 'Invalid JSON file.';
+                        if (function_exists('json_last_error_msg')) {
+                            $message = json_last_error_msg();
+                        }
+                        throw new \Exception($message, $code);
                     }
                 } elseif (is_array($json)) {
                     $datas[$path] = self::$files[$path] = $json;
