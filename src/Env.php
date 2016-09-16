@@ -165,20 +165,32 @@ class Env
      *
      * @return string Directory path
      */
-    private static function getBaseDir()
-    {
-        $dir = __DIR__;
-        foreach (debug_backtrace() as $val) {
-            if (!empty($val['file'])) {
-                if (!empty($val['class']) && __CLASS__ == $val['class']) {
-                    continue;
-                }
-                $dir = dirname($val['file']);
-                break;
-            }
-        }
-        return $dir;
-    }
+     private static function getBaseDir()
+     {
+         $dir = __DIR__;
+         foreach (debug_backtrace() as $key => $val) {
+             if (!empty($val['file']) && !empty($val['function'])) {
+                 if (
+                     // NOTE: Not current dir and current class and called "file" method
+                     (
+                         dirname($val['file']) !== __DIR__
+                         && !empty($val['class']) && __CLASS__ == $val['class']
+                         && 'file' === $val['function']
+                     )
+
+                     // NOTE: Not current class and called "env" function
+                     || (
+                         (empty($val['class']) || __CLASS__ !== $val['class'])
+                         && 'env' === $val['function']
+                     )
+                 ) {
+                     $dir = dirname($val['file']);
+                     break;
+                 }
+             }
+         }
+         return $dir;
+     }
 
     /**
      * Load JSON file(s)
@@ -208,29 +220,33 @@ class Env
                 continue;
             }
 
+            $filepath = $file;
+
             // If not Absolute path
-            if ('/' !== $file{0}) {
+            if ('/' !== $filepath{0} || !is_dir(dirname($filepath))) {
                 if (null === $dir) {
                     $dir = self::getBaseDir();
                 }
-                $file = $dir.DIRECTORY_SEPARATOR.$file;
+                $filepath = $dir.DIRECTORY_SEPARATOR;
+                $filepath .= preg_replace('#\A'.preg_quote($dir).'#', '', $file);
             }
 
             // If file not exists or already loaded
-            if (!($path = realpath($file))) {
+            if (!($path = realpath($filepath))) {
+                $errors[] = $file;
                 continue;
             } elseif (!empty(self::$files[$path])) {
-                self::$storage = array_replace_recursive(self::$storage, self::$files[$path]);
-            }
-
-            $content = file_get_contents($path);
-            $json = json_decode($content, true);
-            if (empty($json)) {
-                if (JSON_ERROR_NONE !== ($code = json_last_error())) {
-                    throw new \Exception(json_last_error_msg(), $code);
+                $datas[$path] = self::$files[$path];
+            } else {
+                $content = file_get_contents($path);
+                $json = json_decode($content, true);
+                if (empty($json)) {
+                    if (JSON_ERROR_NONE !== ($code = json_last_error())) {
+                        throw new \Exception(json_last_error_msg(), $code);
+                    }
+                } elseif (is_array($json)) {
+                    $datas[$path] = self::$files[$path] = $json;
                 }
-            } elseif (is_array($json)) {
-                $datas[$path] = self::$files[$path] = $json;
             }
         }
 
