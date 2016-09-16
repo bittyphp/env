@@ -30,8 +30,11 @@ class EnvClassTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadNotValidFile()
     {
-        $this->expectException('\\Exception');
-        Env::file(__DIR__.'/env-notvalid.json');
+        try {
+            Env::file(__DIR__.'/env-notvalid.json');
+        } catch (\Exception $e) {
+            $this->assertTrue(true);
+        }
     }
 
     public function testLoadFile()
