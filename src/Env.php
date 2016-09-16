@@ -109,6 +109,16 @@ class Env
             return $_ENV[$name];
         } elseif (array_key_exists($name, $_SERVER)) {
             return $_SERVER[$name];
+        } elseif (false !== strpos($name, '.')) {
+            $src = self::$storage;
+            foreach (explode('.', $name) as $val) {
+                if (array_key_exists($val, $src)) {
+                    $src = $src[$val];
+                } else {
+                    return;
+                }
+            }
+            return $src;
         }
     }
 
@@ -286,11 +296,14 @@ class Env
             $replaces = array();
             foreach ($matches[2] as $i => $name) {
                 $match = $matches[0][$i];
-                if (false !== ($pos = strpos($name, '.'))) {
+                if (false !== strpos($name, '.')) {
                     $src = $source;
                     foreach (explode('.', $name) as $val) {
                         if (array_key_exists($val, $src)) {
                             $src = $src[$val];
+                        } else {
+                            $src = null;
+                            break;
                         }
                     }
                     if (!is_array($src)) {
