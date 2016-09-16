@@ -57,14 +57,14 @@ class Env
             foreach ($json as $key => $val) {
                 $values[$key] = $val;
             }
-            $values = self::filter($values);
+            $values = self::filterRecursive($values);
             self::$files[$file] = $values;
             self::$storage = array_replace_recursive(self::$storage, $values);
         }
 
         self::$targetFile = null;
 
-        self::$storage = self::filter(self::$storage);
+        self::$storage = self::filterRecursive(self::$storage);
         self::$storage = self::getFixedPathValue(self::$storage);
 
         $is_putenv = function_exists('putenv');

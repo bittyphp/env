@@ -23,14 +23,20 @@ class EnvTest extends \PHPUnit_Framework_TestCase
         env(PHP_EOL);
     }
 
-    public function testLoadFile()
-    {
-        $this->assertTrue(env(array($this->file1, $this->file2)));
-    }
-
     public function testLoadNotFoundFile()
     {
         $this->assertFalse(env(array('xxx.json')));
+    }
+
+    public function testLoadNotValidFile()
+    {
+        $this->expectException(\Exception::class);
+        env(array(__DIR__.'/env-notvalid.json'));
+    }
+
+    public function testLoadFile()
+    {
+        $this->assertTrue(env(array($this->file1, $this->file2)));
     }
 
     public function testClear()

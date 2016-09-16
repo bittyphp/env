@@ -23,14 +23,20 @@ class EnvClassTest extends \PHPUnit_Framework_TestCase
         Env::clear();
     }
 
-    public function testLoadFile()
-    {
-        $this->assertTrue(Env::file($this->file1, $this->file2));
-    }
-
     public function testLoadNotFoundFile()
     {
         $this->assertFalse(Env::file('xxx.json'));
+    }
+
+    public function testLoadNotValidFile()
+    {
+        $this->expectException(\Exception::class);
+        Env::file(__DIR__.'/env-notvalid.json');
+    }
+
+    public function testLoadFile()
+    {
+        $this->assertTrue(Env::file($this->file1, $this->file2));
     }
 
     public function testClear()
