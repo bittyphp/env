@@ -1,9 +1,15 @@
 <?php
+/**
+ * BittyPHP/Env (helper function)
+ *
+ * Licensed under The MIT License
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 if (!function_exists('env')) {
     if (!class_exists('\\BittyPHP\\Env')) {
         include(__DIR__.'/Env.php');
     }
-    
+
     /**
      * Env class alias
      * @param  mixed $name Key name

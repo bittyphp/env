@@ -1,4 +1,9 @@
-
+/**
+ * BittyPHP/Env (for node.js)
+ *
+ * Licensed under The MIT License
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 module.exports = (function(_fs, _path) {
     var FILTER_RETRY_MAX = 5,
     TARGET_FILE = null,
