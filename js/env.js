@@ -63,8 +63,8 @@ module.exports = (function(_fs, _path) {
 
     var GetBaseDir = function() {
         var dir = __dirname;
-        if (module && module.parent && module.parent.dirname) {
-            dir = module.parent.dirname;
+        if (module && module.parent && module.parent.filename) {
+            dir = _path.dirname(module.parent.filename);
         }
         return dir;
     };
