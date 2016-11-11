@@ -1,5 +1,5 @@
 {
-  "name": "bittyphp/env",
+  "name": "kijtra/env",
   "description": "Set and use environment from JSON file.",
   "type": "library",
   "keywords": ["environment", "env"],
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "BittyPHP\\": "src/"
+      "Kijtra\\": "src/"
     },
     "files": [
       "src/function.php"

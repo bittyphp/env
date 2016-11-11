@@ -1,9 +1,9 @@
-# bittyphp/env
+# kijtra/env
 
-[![Build Status](https://travis-ci.org/bittyphp/env.svg?branch=master)](https://travis-ci.org/bittyphp/env)
-[![Coverage Status](https://coveralls.io/repos/github/bittyphp/env/badge.svg)](https://coveralls.io/github/bittyphp/env)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/bittyphp/env/blob/master/LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/bittyphp/env.svg?style=flat-square)](https://packagist.org/packages/bittyphp/env)
+[![Build Status](https://travis-ci.org/kijtra/env.svg?branch=master)](https://travis-ci.org/kijtra/env)
+[![Coverage Status](https://coveralls.io/repos/github/kijtra/env/badge.svg)](https://coveralls.io/github/kijtra/env)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/kijtra/env/blob/master/LICENSE)
+[![Total Downloads](https://img.shields.io/packagist/dt/kijtra/env.svg?style=flat-square)](https://packagist.org/packages/kijtra/env)
 
 Set and use environment from JSON file.
 Inspired [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv).  
@@ -16,7 +16,7 @@ Support PHP >= 5.3
 Using Composer
 
 ```php
-composer.phar require bittyphp/env
+composer.phar require kijtra/env
 ```
 
 ## SetUp
@@ -132,7 +132,7 @@ Function `env()` is alias of this class.
 
 ```php
 <?php
-use \BittyPHP\Env;
+use \kijtra\Env;
 
 // Load JSON file
 Env::file('/path/to/env.json');

@@ -1,12 +1,12 @@
 <?php
 /**
- * BittyPHP/Env (helper function)
+ * Kijtra/Env (helper function)
  *
  * Licensed under The MIT License
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 if (!function_exists('env')) {
-    if (!class_exists('\\BittyPHP\\Env')) {
+    if (!class_exists('\\Kijtra\\Env')) {
         include(__DIR__.'/Env.php');
     }
 
@@ -19,22 +19,22 @@ if (!function_exists('env')) {
     {
         // Get all data
         if (0 === func_num_args()) {
-            return \BittyPHP\Env::all();
+            return \Kijtra\Env::all();
         }
 
         // Clear all data
         elseif (PHP_EOL === $arg) {
-            return \BittyPHP\Env::clear();
+            return \Kijtra\Env::clear();
         }
 
         // Add JSON file
         elseif (is_string($arg)) {
-            return \BittyPHP\Env::get($arg);
+            return \Kijtra\Env::get($arg);
         }
 
         // Add JSON file
         elseif (is_array($arg)) {
-            return \BittyPHP\Env::file($arg);
+            return \Kijtra\Env::file($arg);
         }
     }
 }
